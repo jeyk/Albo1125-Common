@@ -103,7 +103,7 @@ namespace Albo1125.Common
                 pop.Display();
             }
         }
-     
+
         private static TupleList<string, string> PluginsDownloadLink = new TupleList<string, string>();
 
 
@@ -143,7 +143,11 @@ namespace Albo1125.Common
 
                             NewVersion = new Version(s);
                         }
-                        catch (Exception e) { LSPDFRUpdateAPIRunning = false; Game.LogTrivial("LSPDFR Update API down. Aborting checks."); }
+                        catch (Exception)
+                        {
+                            LSPDFRUpdateAPIRunning = false;
+                            Game.LogTrivial("LSPDFR Update API down. Aborting checks.");
+                        }
                     }
                 });
                 FetchVersionThread.Start();
@@ -162,11 +166,11 @@ namespace Albo1125.Common
                 }
 
             }
-            catch (System.Threading.ThreadAbortException e)
+            catch (System.Threading.ThreadAbortException)
             {
-
+                // do nothing
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 Game.LogTrivial("Error while checking " + ModificationName + " for updates.");
             }
@@ -213,7 +217,7 @@ namespace Albo1125.Common
 
                 }
 
-                
+
                 DateTime NextUpdateCheckDT = DateTime.Now.AddDays(1);
                 if (CommonVariablesDoc.Root.Element("NextUpdateCheckDT") == null) { CommonVariablesDoc.Root.Add(new XElement("NextUpdateCheckDT")); }
                 CommonVariablesDoc.Root.Element("NextUpdateCheckDT").Value = NextUpdateCheckDT.ToBinary().ToString();
@@ -240,21 +244,21 @@ namespace Albo1125.Common
                 throw e;
             }
 
-            
+
 
 
 
         }
 
         public static void VerifyXmlNodeExists(string Name, string FileID, string DownloadLink, string Path)
-        {        
+        {
             Game.LogTrivial("Albo1125.Common verifying update entry for " + Name);
             XDocument xdoc =
 
                     new XDocument(
                             new XElement("UpdateEntry")
                         );
-                        
+
             try
             {
                 Directory.CreateDirectory("Albo1125.Common/UpdateInfo");
@@ -273,7 +277,7 @@ namespace Albo1125.Common
                 xdoc.Root.Element("Path").Value = XmlConvert.EncodeName(Path);
 
                 xdoc.Save("Albo1125.Common/UpdateInfo/" + Name + ".xml");
-                
+
             }
             catch (System.Xml.XmlException e)
             {
@@ -309,7 +313,7 @@ namespace Albo1125.Common
 
 
             }
-            
+
 
         }
 

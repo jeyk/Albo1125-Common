@@ -119,7 +119,10 @@ namespace Albo1125.Common.CommonLibrary
                 System.Windows.Media.FormattedText formatted = new System.Windows.Media.FormattedText(item,
                     CultureInfo.CurrentCulture,
                     System.Windows.FlowDirection.LeftToRight,
-                    new System.Windows.Media.Typeface(fontFamily), emSize, System.Windows.Media.Brushes.Black);
+                    new System.Windows.Media.Typeface(fontFamily),
+                    emSize,
+                    System.Windows.Media.Brushes.Black,
+                    1.0); // FIXME: 1.0 is probably not correct
 
 
                 actualWidth += formatted.Width;
