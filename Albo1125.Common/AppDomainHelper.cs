@@ -12,7 +12,7 @@ namespace Albo1125.Common
     using System.Linq;
     using System.Runtime.InteropServices;
 
-    using mscoree;
+    // using mscoree;
 
     [Serializable]
     public class AppDomainHelper
@@ -70,6 +70,11 @@ namespace Albo1125.Common
         public static IList<AppDomain> GetAppDomains()
         {
             IList<AppDomain> domains = new List<AppDomain>();
+
+            return domains;
+
+            // FIXME
+            /*
             IntPtr enumHandle = IntPtr.Zero;
             ICorRuntimeHost host = new CorRuntimeHost();
 
@@ -92,6 +97,7 @@ namespace Albo1125.Common
                 host.CloseEnum(enumHandle);
                 Marshal.ReleaseComObject(host);
             }
+            */
         }
     }
 }
